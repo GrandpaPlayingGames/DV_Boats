@@ -1,0 +1,204 @@
+{
+  "boatCameraProfiles": {
+    "FishingBoat_01": [
+      {
+        "name": "Boat Chase Rear",
+        "offset": {
+          "x": 0.0,
+          "y": 10.0,
+          "z": -30.0
+        },
+        "mode": "LookForward"
+      },
+      {
+        "name": "Rear Deck",
+        "offset": {
+          "x": 0.0,
+          "y": 6.0,
+          "z": -7.5
+        },
+        "mode": "LookForward"
+      },
+      {
+        "name": "Flybridge",
+        "offset": {
+          "x": 0.0,
+          "y": 11.2,
+          "z": 8.0
+        },
+        "mode": "LookForward"
+      },
+      {
+        "name": "Bow Forward",
+        "offset": {
+          "x": 0.0,
+          "y": 8.0,
+          "z": 15.25
+        },
+        "mode": "LookForward"
+      },
+
+      {
+        "name": "Boat Side Left",
+        "offset": {
+          "x": -30.0,
+          "y": 7.0,
+          "z": 0.0
+        },
+        "mode": "LookAtLoco"
+      },
+      {
+        "name": "Boat Side Right",
+        "offset": {
+          "x": 30.0,
+          "y": 7.0,
+          "z": 0.0
+        },
+        "mode": "LookAtLoco"
+      },
+      {
+        "name": "Boat Chase Front",
+        "offset": {
+          "x": 0.0,
+          "y": 6.0,
+          "z": 36.0
+        },
+        "mode": "LookBackward"
+      }
+    ],
+
+    "FishingBoat_02": [
+      {
+        "name": "Boat Chase Rear",
+        "offset": {
+          "x": 0.0,
+          "y": 10.0,
+          "z": -24.0
+        },
+        "mode": "LookForward"
+      },
+      {
+        "name": "Rear Deck",
+        "offset": {
+          "x": 0.0,
+          "y": 6.0,
+          "z": -12.0
+        },
+        "mode": "LookForward"
+      },
+      {
+        "name": "Flybridge",
+        "offset": {
+          "x": 0.0,
+          "y": 9.2,
+          "z": 8.0
+        },
+        "mode": "LookForward"
+      },
+      {
+        "name": "Bow Forward",
+        "offset": {
+          "x": 0.0,
+          "y": 8.0,
+          "z": 12.25
+        },
+        "mode": "LookForward"
+      },
+
+      {
+        "name": "Boat Side Left",
+        "offset": {
+          "x": -30.0,
+          "y": 7.0,
+          "z": 0.0
+        },
+        "mode": "LookAtLoco"
+      },
+      {
+        "name": "Boat Side Right",
+        "offset": {
+          "x": 30.0,
+          "y": 7.0,
+          "z": 0.0
+        },
+        "mode": "LookAtLoco"
+      },
+      {
+        "name": "Boat Chase Front",
+        "offset": {
+          "x": 0.0,
+          "y": 6.0,
+          "z": 36.0
+        },
+        "mode": "LookBackward"
+      }
+    ],
+
+    "FishingBoat_03": [
+      {
+        "name": "Boat Chase Rear",
+        "offset": {
+          "x": 0.0,
+          "y": 10.0,
+          "z": -24.0
+        },
+        "mode": "LookForward"
+      },
+      {
+        "name": "Rear Deck",
+        "offset": {
+          "x": 0.0,
+          "y": 7.0,
+          "z": -13.5
+        },
+        "mode": "LookForward"
+      },
+      {
+        "name": "Rooftop",
+        "offset": {
+          "x": 0.0,
+          "y": 11,
+          "z": 3.0
+        },
+        "mode": "LookForward"
+      },
+      {
+        "name": "Bow Forward",
+        "offset": {
+          "x": 0.0,
+          "y": 8.5,
+          "z": 12.25
+        },
+        "mode": "LookForward"
+      },
+
+      {
+        "name": "Boat Side Left",
+        "offset": {
+          "x": -30.0,
+          "y": 7.0,
+          "z": 0.0
+        },
+        "mode": "LookAtLoco"
+      },
+      {
+        "name": "Boat Side Right",
+        "offset": {
+          "x": 30.0,
+          "y": 7.0,
+          "z": 0.0
+        },
+        "mode": "LookAtLoco"
+      },
+      {
+        "name": "Boat Chase Front",
+        "offset": {
+          "x": 0.0,
+          "y": 6.0,
+          "z": 36.0
+        },
+        "mode": "LookBackward"
+      }
+    ]
+  }
+}

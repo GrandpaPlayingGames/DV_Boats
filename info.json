@@ -1,0 +1,14 @@
+{
+  "Id": "DV_Boats",
+  "DisplayName": "DV Boats",
+  "Author": "GrandpaPlayingGames",
+  "Version": "1.0.0",
+  "ManagerVersion": "0.27.0",
+  "GameVersion": "B99.5+",
+  "AssemblyName": "DV_Boats.dll",
+  "EntryMethod": "DV_Boats.Main.Load",
+  "HomePage": "https://www.nexusmods.com/derailvalley",
+  "Requirements": [],
+  "LoadAfter": [],
+  "LoadBefore": []
+}
