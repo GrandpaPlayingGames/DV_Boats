@@ -1,44 +1,33 @@
-# DVReplay
-Cinematic Replay Tool for Derail Valley
+# DV_Boats
 
-The Cinematic Replay Tool by GrandpaPlayingGames brings a long awaited feature to Derail Valley.. the opportunity to replay your greatest achievements or most spectacular crashes and view them from multiple angles! V2.0 provides a bunch of new and exciting features with Sounds, Replay Cameras, Improved Lighting, Time Of Day Overrides and more!
 
-DVReplay, the Cinematic Replay Tool will automatically record the last 5 minutes of your gameplay, and at any stage you can jump out of the cab and rewind the action back to any given point and play it back as many times as you want!
-
-Then, when done, hop back into the cab and continue your journey (if your train is capable of continuing that is!). Don’t worry about missing out on job delivery or bonuses whilst you review your journey, the clock stops whilst you are in replay mode, so you can view and review without impacting your career. 
-
-In 2025, GrandpaPlayingGames released the first and only replay tool for Derail Valley. Now, in 2026 we're proud to announce the release of DVReplay V2.0 with many NEW and exciting features.
+Experience Derail Valley ... by BOAT! This mod turns all of your static fishing boats into Drivable vessels. Explore DV's extensive waterways and river systems, and see a side of DV you have not witnessed before!
 
 ---
 
 ## Features
 
-- Full Rod and Wheel Animations for DM3, S060 and S282 locomotives.
-- SOUND! Sounds are recorded as your train moves through the valley.
-- Individual Volume levels for Diesel/Electric Engine Sounds, Steam Chuffing sounds, and clickety-clack sounds
-- 16+ adjustable Replay Chase Cameras for that perfect Cinematic Replay
-- Design your own Custom Chase Camera
-- Time Of Day Override - capture the perfect lighting for your replay.
-- Consumption of Fuel, Oil, Coal, Water, Sand all now paused during replay.
-- Alert Dialog Boxes can be resized, hidden, or dismissed using the Enter Key.
-- Optimised for performance
-- Captures last 5 minutes of your trains activity
-- Supports all current locos and carriages in DV
-- Reproduces diesel smoke/steam
-- Supports multi loco consists
-- Play backwards/forwards or scrub through the timeline
-- Replay at 0.5x, 1.0x, 2x, 4x speeds
-and much more!
+- Converts all of DV's Fishing Boats into Drivable vessels!
+- 3 different type of Fishing Boats to choose from.
+- Each Boat is emhanced with:
+  - Horn
+  - Foghorn
+  - Navigation Lights
+  - Deck Light
+  - Spotlight on swivel
+  - Collision Detection
+  - Multiple Onboard Cameras
+  - Customizable Cameras
+  - Engine and Collision sounds
+  - Special Ghostboat mode to access otherwise unreachable areas.
+ 
+In addition to taking command of any of Derails Valleys standard static fishing boats, you can spawn your own anywhere within the Valley (on water of course)
+
+Boats may be driven from onboard Camera Views, or even controlled like Remote Controlled vessels from the shorelines or other vantage points.
  
 ## Notes: 
-This is a Cinematic Replay Tool. Its purpose is to represent the movement of your train and any carriages it may have interacted with during the preceding 5 minutes of your gameplay. 
 
-Replay trains are not drivable and cannot be interacted with. They are a representation of the train you have been driving. When replay is exited your original (interactive and drivable) train will reappear.
-
-**** IMPORTANT ***
-DVReplay V2.0 is a major upgrade. If you have a previous version of DVReplay you MUST delete it or move it out of the Mods folder BEFORE installing this version.
-
-DVReplay is a FREE Mod for Derail Valley users. If you get enjoyment or value out of it, please consider buying me a coffee  https://buymeacoffee.com/GrandpaPlayingGames to allow Grandpa, a retiree living in the Philippines, to continue to provide engaging content for fans of Derail Valley and other Sims.
+DV_Boats is a FREE Mod for Derail Valley users. If you get enjoyment or value out of it, *please* consider buying me a coffee  https://buymeacoffee.com/GrandpaPlayingGames to allow Grandpa, a retiree living in the Philippines, to continue to provide engaging content for fans of Derail Valley and other Sims.
 
 ---
 
@@ -59,20 +48,34 @@ Download the latest compiled release from **Nexus Mods** (link below) and follow
 If you prefer to build DVBonusTimer from source:
 
 1. Clone this repository
-2. Open `DVBReplayMod.sln` in Visual Studio
+2. Open `DV_Boats.sln` in Visual Studio
 3. Build in `Release`
 4. Copy the output DLL and required files into a UMM mod folder:
 
-Derail Valley/Mods/DVReplay/
-info.json
-DVReplayMod.dll
-
-5. Launch the game and enable DVReplay in Unity Mod Manager.
+- Derail Valley/Mods/DV_Boats/
+- info.json
+- DV_Boats.dll
+- DV_Boats_cameras.json
+- Assets
+- Asaets/Audio
+- Assets/Audio/crash.mp3
+- Assets/Audio/engine_loop.mp3
+- Assets/Audio/foghorn.mp3
+- Assets/Audio/hornmp3
+- Assets/Audio/scrape_loop.mp3
+- Assets/Icons
+- Assets/Icons/decklighIcon.png
+- Assets/Icons/ghostBoatIcon.png
+- Assets/Icons/hornIconLarge.png
+- Assets/Icons/horbIconSmall.png
+- Assets/Icons/navlightsIcon.png
+- Assets/Icons/spotlightIcon.png
 
 Derail Valley/Mods/
 
-3. Launch Derail Valley.
-4. Open Unity Mod Manager and confirm **DVReplay** is enabled.
+5. Launch the game and enable DVReplay in Unity Mod Manager.
+6. Launch Derail Valley.
+7. Open Unity Mod Manager and confirm **DV_Boats** is enabled.
 
 ---
 
@@ -80,7 +83,7 @@ Derail Valley/Mods/
 
 ### Mod does not appear in UMM
 - Confirm the mod folder is directly under:
-Derail Valley/Mods/DVReplay/
+Derail Valley/Mods/DV_Boats/
 
 - Confirm `info.json` is present next to the DLL.
 
@@ -88,13 +91,13 @@ Derail Valley/Mods/DVReplay/
 
 ## Development
 
-This repository contains the full source code for DVReplay.
+This repository contains the full source code for DV_Boats.
 
 ### Build
-- Open `DVReplayMod.sln` in Visual Studio
+- Open `DV_Boats.sln` in Visual Studio
 - Build configuration: **Release**
 - Output DLL will be produced under:
-DVReplay/bin/DVReplayRelease/
+DV_Boats/bin/Release/
 
 ---
 
@@ -130,9 +133,10 @@ Derail Valley is developed by **Altfuture**. This mod is an unofficial community
 
 ## Links
 
-- GitHub repository: https://github.com/GrandpaPlayingGames/DVBonusTimer
-- Nexus Mods: https://www.nexusmods.com/derailvalley/mods/1290
-- YouTube: https://www.youtube.com/@GrandpaPlayingGames
 - BuyMeACoffee: https://buymeacoffee.com/grandpaplayinggames
+- GitHub repository: https://github.com/GrandpaPlayingGames/DV_Boats
+- Nexus Mods: https://www.nexusmods.com/derailvalley/mods/1429
+- YouTube: https://www.youtube.com/@GrandpaPlayingGames
+
 
 
