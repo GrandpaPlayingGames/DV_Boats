@@ -9,7 +9,7 @@ namespace DV_Boats
         public StaticBoatRegistrationKey Key;
 
         public float rayLength = 50f;
-        public LayerMask mask = ~0; // everything
+        public LayerMask mask = ~0;
 
         private readonly HashSet<Transform> hitsThisFrame =
             new HashSet<Transform>();
@@ -135,7 +135,7 @@ namespace DV_Boats
                 }
             }
 
-            Object.Destroy(go.GetComponent<Collider>()); // visual only
+            Object.Destroy(go.GetComponent<Collider>());
             return go;
         }
 

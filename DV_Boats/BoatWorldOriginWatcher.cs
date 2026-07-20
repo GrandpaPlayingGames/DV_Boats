@@ -109,7 +109,6 @@ namespace DV_Boats
                             _wosPlayerTf = playerTf;
                             _wosBoatTf = boatTf;
 
-                            // Capture exact world pose
                             _wosPlayerWorldPos = playerTf.position;
                             _wosPlayerWorldRot = playerTf.rotation;
 

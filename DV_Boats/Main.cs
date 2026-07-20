@@ -166,9 +166,6 @@ namespace DV_Boats
             }
         }
 
-        // -------------------------
-        // UTILS
-        // -------------------------
         public static void Log(string message, bool force = false)
         {          
             if (!force && Settings != null && !Settings.debugLogging)

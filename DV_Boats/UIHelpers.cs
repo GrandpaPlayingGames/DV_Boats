@@ -96,7 +96,6 @@ public static class UIHelpers
 
     public static void ShowDialog(string title, string message, Action onYes, Action onNo, float scale = 1f)
     {
-        // ✅ Ensure EventSystem exists
         if (GameObject.FindObjectOfType<UnityEngine.EventSystems.EventSystem>() == null)
         {
             GameObject es = new GameObject("EventSystem");
@@ -105,7 +104,6 @@ public static class UIHelpers
             UnityEngine.Object.DontDestroyOnLoad(es);
         }
 
-        // Create Canvas
         GameObject canvasGO = new GameObject("ReplayDialogCanvas");
         UnityEngine.Object.DontDestroyOnLoad(canvasGO);
 
@@ -114,7 +112,6 @@ public static class UIHelpers
         canvasGO.AddComponent<CanvasScaler>().uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
         canvasGO.AddComponent<GraphicRaycaster>();
 
-        // Add background panel
         GameObject panelGO = new GameObject("DialogPanel");
         panelGO.transform.SetParent(canvasGO.transform, false);
 
@@ -128,7 +125,6 @@ public static class UIHelpers
         Image panelImage = panelGO.AddComponent<Image>();
         panelImage.color = new Color(0, 0, 0, 0.85f);
 
-        // Title
         GameObject titleGO = new GameObject("Title");
         titleGO.transform.SetParent(panelGO.transform, false);
         Text titleText = titleGO.AddComponent<Text>();
@@ -144,7 +140,6 @@ public static class UIHelpers
         titleText.color = Color.white;
         titleText.alignment = TextAnchor.MiddleCenter;
 
-        // Message
         GameObject msgGO = new GameObject("Message");
         msgGO.transform.SetParent(panelGO.transform, false);
         Text msgText = msgGO.AddComponent<Text>();
@@ -160,12 +155,10 @@ public static class UIHelpers
         msgText.color = Color.white;
         msgText.alignment = TextAnchor.MiddleCenter;
 
-        // mark dialog as open
         DialogOpen = true;
 
         if (onNo == null)
         {
-            // Single OK button (centered)
             Button okBtn = CreateButton("OK", "OK", new Vector2(0, -50), panelGO.transform, () =>
             {
                 DialogOpen = false;
@@ -173,16 +166,13 @@ public static class UIHelpers
                 onYes?.Invoke();
             }, scale);
 
-            // Attach keyboard controller (only one button)
             var controller = canvasGO.AddComponent<DialogKeyboardController>();
             controller.Init(new Button[] { okBtn }, 0);
 
-            // Auto-dismiss after 5 seconds (only for OK-only dialogs)
             canvasGO.AddComponent<AutoDestroyAfterSeconds>().Init(5f, onYes);
         }
         else
         {
-            // Yes/No buttons (left/right)
             Button yesBtn = CreateButton("Yes", "Yes", new Vector2(-50, -50), panelGO.transform, () =>
             {
                 DialogOpen = false;
@@ -197,7 +187,6 @@ public static class UIHelpers
                 onNo?.Invoke();
             }, scale);
 
-            // Attach keyboard controller (YES is default selected)
             var controller = canvasGO.AddComponent<DialogKeyboardController>();
             controller.Init(new Button[] { yesBtn, noBtn }, 0);
         }
@@ -206,7 +195,6 @@ public static class UIHelpers
 
     private static Button CreateButton(string name, string label, Vector2 pos, Transform parent, Action onClick, float scale)
     {
-        // ---------- ROOT ----------
         GameObject buttonGO = new GameObject(name + "Button");
         buttonGO.transform.SetParent(parent, false);
 
@@ -214,16 +202,13 @@ public static class UIHelpers
         btnRT.sizeDelta = new Vector2(60f * scale, 20f * scale);  
         btnRT.anchoredPosition = pos * scale;                    
 
-        // ---------- BUTTON + IMAGE ----------
         Button button = buttonGO.AddComponent<Button>();
         Image img = buttonGO.AddComponent<Image>();
 
-        // NEW color from the improved version (dark green default)
         img.color = new Color(0.15f, 0.35f, 0.15f, 1f);
 
         button.onClick.AddListener(() => onClick());
 
-        // ---------- TEXT ----------
         GameObject txtGO = new GameObject("Text");
         txtGO.transform.SetParent(buttonGO.transform, false);
 
@@ -281,7 +266,6 @@ public static class UIHelpers
     {
         if (g == null) return;
 
-        // Try get/add the flasher that lives in DVReplay namespace
         var fl = g.GetComponent<DVReplay.UIFlasher>();
         if (enable)
         {
@@ -323,7 +307,6 @@ public static class UIHelpers
         yield return new WaitForSeconds(duration);
         img.color = original;
 
-        // Clear selection (keyboard safety)
         if (EventSystem.current != null &&
             EventSystem.current.currentSelectedGameObject == btn.gameObject)
         {

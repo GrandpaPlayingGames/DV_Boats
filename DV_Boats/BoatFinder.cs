@@ -174,7 +174,6 @@ namespace DV_Boats
 
         public readonly struct StaticBoatRegistrationKey : IEquatable<StaticBoatRegistrationKey>
         {
-            // millimetre precision
             public readonly long x;
             public readonly long y;
             public readonly long z;

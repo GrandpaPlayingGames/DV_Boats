@@ -39,6 +39,9 @@ namespace DV_Boats
 
         private bool wasBlocked;
 
+        private int blockedFrameCount = 0;
+        private const int blockedFramesRequired = 2;
+
         [Header("Side Bounce (No Yaw)")]
         public float sideBounceStrength = 3.0f;
         public float maxBounceSpeed = 12f;
@@ -68,17 +71,29 @@ namespace DV_Boats
         public void SetEnabled(bool enabled)
         {
             _enabled = enabled;
+
+            if (!enabled)
+            {
+                ClearProbeBlockState();
+                blockedFrameCount = 0;
+                scrapeEndTime = 0f;
+
+                if (scrapeSource != null)
+                    scrapeSource.volume = 0f;
+            }
         }
- 
+
 
         private void Awake()
         {
-            //CreateProbes();
             rb = GetComponent<Rigidbody>();        
         }     
 
         private void FixedUpdate()
         {
+            if (!_enabled)
+                return;
+
             if (rb == null)
                 return;
 
@@ -212,7 +227,20 @@ namespace DV_Boats
             bool bowStop = BowBlocked && forwardSpeed > 0.1f;
             bool sternStop = SternBlocked && forwardSpeed < -0.1f;
 
-            bool nowBlocked = bowStop || sternStop;
+            //==================== V1.1 MAKE GLITCH RESILIENT ====================
+            bool rawBlocked = bowStop || sternStop;
+
+            if (rawBlocked)
+            {
+                blockedFrameCount++;
+            }
+            else
+            {
+                blockedFrameCount = 0;
+            }
+
+            bool nowBlocked = blockedFrameCount >= blockedFramesRequired;
+            //====================================================================
 
             if (nowBlocked && !wasBlocked)
             {
@@ -362,7 +390,10 @@ namespace DV_Boats
                     if (hit.collider == null)
                         continue;
 
-                     if (hit.collider.transform.IsChildOf(transform))
+                    if (hit.collider.gameObject.name.StartsWith("DV_BEACHBALL_"))
+                        continue;
+
+                    if (hit.collider.transform.IsChildOf(transform))
                         continue;
 
                      if (hit.collider.GetComponentInParent<ItemBuoyancyEnabler>() != null)
@@ -388,6 +419,12 @@ namespace DV_Boats
 
                 foreach (var hit in hits)
                 {
+                    if (hit.collider == null)
+                        continue;
+
+                    if (hit.collider.gameObject.name.StartsWith("DV_BEACHBALL_"))
+                        continue;
+
                     hitCount++;           
                 }
                 if (hitCount > 0)

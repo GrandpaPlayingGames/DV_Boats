@@ -25,8 +25,6 @@ namespace DV_Boats
         private Color _savedStatusColor;
         private static Text footerStatusText;
 
-
-        //------icons
         private static Sprite hornIconSmall;
         private static Sprite hornIconLarge;
         private static Sprite navlightsIcon;
@@ -36,9 +34,6 @@ namespace DV_Boats
 
         private static bool visible;
 
-        // =========================
-        // HORN UI STATE
-        // =========================
         private static bool hornActive;
         private static bool foghornActive;
 
@@ -48,7 +43,7 @@ namespace DV_Boats
         private const float HORN_ACTIVE_TIME = 2.5f;
         private const float FOGHORN_ACTIVE_TIME = 3.0f;
 
-        // UI refs
+
         private static UnityEngine.UI.Button hornButton;
         private static UnityEngine.UI.Button foghornButton;
 
@@ -64,29 +59,25 @@ namespace DV_Boats
             decklight,
             spotlight
         }
-        // Camera buttons
+
         private Button prevCamBtn;
         private Button nextCamBtn;
 
-        // Movement buttons
         private static Button btnForward;
         private static Button btnBackward;
         private static Button btnLeft;
         private static Button btnRight;
 
-        // Ghost Boat
         private UnityEngine.UI.Button ghostBoatButton;
         public static bool ghostBoatOn;
         private UnityEngine.UI.Image ghostBoatButtonImage;
         public static bool GhostBoatOn => ghostBoatOn;
 
-        // UI-held state
         private static bool moveForwardUIHeld;
         private static bool moveBackwardUIHeld;
         private static bool moveLeftUIHeld;
         private static bool moveRightUIHeld;
 
-        // Key-held state
         private static bool moveForwardKeyHeld;
         private static bool moveBackwardKeyHeld;
         private static bool moveLeftKeyHeld;
@@ -110,9 +101,6 @@ namespace DV_Boats
         public static bool MoveRightHeld =>
             moveRightUIHeld || moveRightKeyHeld;
 
-        // ==============================
-        //          LIGHTS
-        // ==============================
         private UnityEngine.UI.Button deckLightButton;
         private UnityEngine.UI.Button navLightButton;
         private UnityEngine.UI.Button spotLightButton;      
@@ -122,16 +110,12 @@ namespace DV_Boats
         private UnityEngine.UI.Image spotLightButtonImage;
         private UnityEngine.UI.Image spotLightSwivelCenterButtonImage;
 
-        // =========================
-        // LIGHT UI STATE
-        // =========================
         public static bool deckLightOn;
         public static bool navLightOn;
         public static bool spotLightOn;
         public static bool DeckLightOn => deckLightOn;
         public static bool NavLightOn => navLightOn;
 
-        // SpotLight
         private static Button btnSpotLightSwivelLeft;
         private static Button btnSpotLightSwivelRight;
         private static Button btnSpotLightSwivelCenter;        
@@ -140,7 +124,6 @@ namespace DV_Boats
         private static bool spotLightSwivelLeftUIHeld;
         private static bool spotLightSwivelRightUIHeld;
 
-        // Key-held state
         private static bool spotLightSwivelLeftKeyHeld;
         private static bool spotLightSwivelRightKeyHeld;
         public static bool SpotLightSwivelLeftHeld =>
@@ -150,19 +133,9 @@ namespace DV_Boats
             spotLightSwivelRightUIHeld || spotLightSwivelRightKeyHeld;
 
 
-        // =========================
-        // LIGHT UI STATE
-        // =========================
-        //private static bool deckLightActive;
-        //private static bool navLightActive;
-        //private static bool spotLightActive;
-
         [SerializeField]
         private Light deckLight;
 
-        // =========================
-        // CAMERAS
-        // =========================
         private Text _camModeLabel;
         private List<string> _camModes;
         private int _camIndex;
@@ -264,7 +237,6 @@ namespace DV_Boats
 
             UnityEngine.Object.DontDestroyOnLoad(canvasObj);
 
-            // ---------------- Panel ----------------
             panelObj = CreateUIElement("BoatUIPanel", canvasObj.transform);
 
             var panelImage = panelObj.AddComponent<UnityEngine.UI.Image>();
@@ -277,10 +249,8 @@ namespace DV_Boats
             panelRect.anchoredPosition = new Vector2(0f, 90f);
             panelRect.sizeDelta = new Vector2(900f, 430f);
 
-            // Layout cursor
             SetY(380);
 
-            // ---------------- Title ----------------
             CreateText(
                 "🚤 DV_Boats",
                 panelObj.transform,
@@ -319,10 +289,6 @@ namespace DV_Boats
 
             SetY(310);
             CreateDivider(panelObj.transform);
-
-            // --------------------------------------------------
-            // Camera Mode UI
-            // --------------------------------------------------
 
             SetY(260);
 
@@ -662,7 +628,7 @@ namespace DV_Boats
                                Main.Settings.backwardKey,
                                Main.Settings.backwardCtrl,
                                Main.Settings.backwardAlt,
-                               Main.Settings.backwardShift     //or 'false' if n/a
+                               Main.Settings.backwardShift    
                            )
                        );
 
@@ -728,7 +694,6 @@ namespace DV_Boats
                 ) +
                 " to Exit Driving Mode";
 
-            // 🔑 STORE IT
             footerStatusText =
                 CreateText(
                     hideShowText,
@@ -825,7 +790,6 @@ namespace DV_Boats
             txt.alignment = anchor;
             txt.color = color ?? Color.white;
 
-            // IMPORTANT
             txt.horizontalOverflow = HorizontalWrapMode.Overflow;
             txt.verticalOverflow = VerticalWrapMode.Overflow;
 
@@ -1204,7 +1168,6 @@ namespace DV_Boats
             Canvas canvas = canvasGO.AddComponent<Canvas>();
             canvas.renderMode = RenderMode.ScreenSpaceOverlay;
 
-            // Lower than UI, higher than world
             canvas.sortingOrder = -100;
 
             CanvasScaler scaler = canvasGO.AddComponent<CanvasScaler>();
@@ -1212,7 +1175,6 @@ namespace DV_Boats
 
             canvasGO.AddComponent<GraphicRaycaster>();
 
-            // Fullscreen tint
             GameObject tintGO = new GameObject("GhostScreenTint");
             tintGO.transform.SetParent(canvasGO.transform, false);
 
@@ -1263,7 +1225,7 @@ namespace DV_Boats
                 ramp = Mathf.Min(1f, ramp + dt / rampTime);
  
                 float s = (Mathf.Sin(t) + 1f) * 0.5f;
-                s = s * s * (3f - 2f * s); // smoothstep
+                s = s * s * (3f - 2f * s);
 
                 float aMin = Mathf.Lerp(0f, minAlpha, ramp);
                 float aMax = Mathf.Lerp(0f, maxAlpha, ramp);
@@ -1535,7 +1497,7 @@ namespace DV_Boats
             {
                 Main.Log("[BoatUI] Blocked BoatCam (Prev) — player not grounded");
                 StartCoroutine(FlashMustBeGroundedForBoatCam());
-                return; // ❗ no index change, no apply
+                return; 
             }
 
             string nextMode = _camModes[nextIndex];
@@ -1568,7 +1530,7 @@ namespace DV_Boats
             {
                 Main.Log("[BoatUI] Blocked BoatCam (Next) — player not grounded");
                 StartCoroutine(FlashMustBeGroundedForBoatCam());
-                return; // ❗ no index change, no apply
+                return;
             }
 
             string nextMode = _camModes[nextIndex];
@@ -1640,16 +1602,12 @@ namespace DV_Boats
             Transform boatTf = GetActiveBoatTransform_SAFELY();
             Camera cam = PlayerManager.ActiveCamera;
 
-            // --------------------------------------------------
-            // FREE ROAM
-            // --------------------------------------------------
             if (requestedMode == "FreeRoam")
             {
                 BoatFollowAnchor.Instance.StopFollowing();
 
                 BoatCameraManager.ActivateFreeRoam();
 
-                // Only teleport onto the boat if the user previously entered a boat cam
                 if (hasEnteredBoatCameraThisSession && boatTf != null)
                 {
                     BoatController bcm = boatTf.GetComponent<BoatController>();
@@ -1678,9 +1636,6 @@ namespace DV_Boats
                 return true;
             }
 
-            // --------------------------------------------------
-            // BOAT CAMERA MODES
-            // --------------------------------------------------
             boatTf = GetActiveBoatTransform_SAFELY();
             BoatController bc = boatTf != null ? boatTf.GetComponent<BoatController>() : null;
             string boatId = bc != null ? bc.BoatTypeId : null;

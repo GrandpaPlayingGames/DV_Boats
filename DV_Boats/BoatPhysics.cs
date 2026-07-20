@@ -65,11 +65,6 @@ namespace DV_Boats
             }
         }
 
-
-       // -------------------------------------------------
-        // Helpers
-        // -------------------------------------------------
-
         private static void AddHull(GameObject boat, string name, Vector3 center, Vector3 size)
         {
             BoxCollider c = boat.AddComponent<BoxCollider>();

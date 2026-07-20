@@ -10,9 +10,6 @@ namespace DV_Boats
 {
     public class BoatComms : MonoBehaviour, ICommsRadioMode
     {
- 
-        //public float scanDelaySeconds = 3.5f; // fake scan delay
-
         private enum CommsState
         {
             Root_NoCachedBoats,

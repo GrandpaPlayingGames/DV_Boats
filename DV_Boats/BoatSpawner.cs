@@ -123,9 +123,6 @@ namespace DV_Boats
                 })
             );
 
-            // =========================
-            // SCRAPE Audio Loop
-            // =========================
             probes.scrapeSource = currentClone.AddComponent<AudioSource>();
             probes.scrapeSource.playOnAwake = false;
             probes.scrapeSource.loop = true;
@@ -153,9 +150,6 @@ namespace DV_Boats
                 })
             );
 
-            // =========================
-            // CRASH Audio (one-shot)
-            // =========================
             probes.crashSource = currentClone.AddComponent<AudioSource>();
             probes.crashSource.playOnAwake = false;
             probes.crashSource.loop = false;
@@ -181,9 +175,6 @@ namespace DV_Boats
                 })
             );
 
-            // =========================
-            // HORN Audio
-            // =========================
             controller.hornSource = currentClone.AddComponent<AudioSource>();
             controller.hornSource.playOnAwake = false;
             controller.hornSource.loop = false;
@@ -193,9 +184,6 @@ namespace DV_Boats
             controller.hornSource.maxDistance = 400f;
             controller.hornSource.dopplerLevel = 0f;
 
-            // =========================
-            // FOGHORN Audio
-            // =========================
             controller.foghornSource = currentClone.AddComponent<AudioSource>();
             controller.foghornSource.playOnAwake = false;
             controller.foghornSource.loop = false;
@@ -205,9 +193,6 @@ namespace DV_Boats
             controller.foghornSource.maxDistance = 600f;
             controller.foghornSource.dopplerLevel = 0f;
 
-            // =========================
-            // Load Horn Sounds
-            // =========================
             string hornPath = AudioLoader.AudioPath("horn.mp3");
             string foghornPath = AudioLoader.AudioPath("foghorn.mp3");
 
@@ -236,10 +221,6 @@ namespace DV_Boats
                     controller.foghornSource.clip = clip;
                  })
             );
-
-            // =========================
-            // DECK LIGHT 
-            // =========================
 
             if (!BoatStructuralProfiles.Profiles.TryGetValue(
                     controller.BoatTypeId, out var dlstructure) ||
@@ -274,10 +255,6 @@ namespace DV_Boats
                 controller.deckLight = deckLight;
             }
 
-            // --------------------------------------------------
-            // Nav lights 
-            // --------------------------------------------------
-
             if (!BoatStructuralProfiles.Profiles.TryGetValue(controller.BoatTypeId, out var structure))
             {
                 Main.Log($"[BoatSpawner] ❌ No structural profile for {controller.BoatTypeId}, nav lights skipped");
@@ -286,7 +263,6 @@ namespace DV_Boats
             {
                 NavLightLayout nav = structure.NavLights;
 
-                // ---------------- PORT (LEFT / RED) ----------------
                 GameObject portLightObj = new GameObject("NavLight_Port");
                 portLightObj.transform.SetParent(currentClone.transform, false);
                 portLightObj.transform.localPosition = nav.Port;
@@ -305,8 +281,6 @@ namespace DV_Boats
                 if (BoatDebug.ShowNavLightEmitters)
                     portLightObj.AddComponent<MeshRenderer>().material.color = Color.red;
 
-
-                // ---------------- STARBOARD (RIGHT / GREEN) ----------------
                 GameObject starLightObj = new GameObject("NavLight_Starboard");
                 starLightObj.transform.SetParent(currentClone.transform, false);
                 starLightObj.transform.localPosition = nav.Starboard;
@@ -348,15 +322,12 @@ namespace DV_Boats
                 mat.SetColor("_EmissionColor", Color.white * 3.0f);
                 r.material = mat;
 
-                // Start OFF
                 mastLightObj.SetActive(false);
 
                 controller.navLightMast = mastLight;
                 controller.navLightMastObj = mastLightObj;
             }
 
-            // --------------------------------------------------
-            // Spotlight
             // --------------------------------------------------
             if (controller == null)
                 controller = currentClone.AddComponent<BoatController>();
@@ -783,13 +754,11 @@ namespace DV_Boats
                 UnityEngine.Object.DontDestroyOnLoad(go);
             }
 
-            // Use any MonoBehaviour as a coroutine host
             _runner = go.GetComponent<MonoBehaviour>();
             if (_runner == null)
                 _runner = go.AddComponent<DVBoatsCoroutineHost>();
         }
 
-        // Minimal host component
         private class DVBoatsCoroutineHost : MonoBehaviour { }
 
         private static IEnumerator ShowReturnDialogAfterDelay(float delay)

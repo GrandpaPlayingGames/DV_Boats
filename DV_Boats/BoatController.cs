@@ -102,8 +102,8 @@ namespace DV_Boats
 
         public Light deckLight;
 
-        public Light navLightPort;      // RED (left)
-        public Light navLightStarboard; // GREEN (right)
+        public Light navLightPort;      
+        public Light navLightStarboard; 
         public Light navLightMast;
         public GameObject navLightMastObj;
 
@@ -122,8 +122,8 @@ namespace DV_Boats
         public GameObject spotLightRoot;
         
         private float spotLightYaw = 0f;
-        private const float SpotLightMaxYaw = 45f;   // degrees
-        private const float SpotLightSwivelSpeed = 20f; // degrees per second
+        private const float SpotLightMaxYaw = 45f;   
+        private const float SpotLightSwivelSpeed = 20f;
         public Transform spotLightSwivelPivot;
 
         
@@ -572,17 +572,12 @@ namespace DV_Boats
                 return;
             }
 
-            // --------------------------------------------------
-            // Water gate
-            // --------------------------------------------------
-
             bool overWater = BoatSpawner.IsOverWaterForBoat(gameObject);
 
             if (!overWater)
             {
                 Main.Log("WaterGate fired");
 
-                // Latch the blocked direction once
                 if (waterGateBlockedDirection == 0)
                 {
                     if (throttle > 0f)
@@ -611,9 +606,6 @@ namespace DV_Boats
                  waterGateBlockedDirection = 0;
             }
 
-            // --------------------------------------------------
-            // SPEED 
-            // --------------------------------------------------
             float speed = rb.velocity.magnitude;
             float speedFactor = Mathf.Clamp01(speed / 6f);
 
@@ -631,11 +623,6 @@ namespace DV_Boats
                 CurrentHeading = h;
             }
 
-
-            // --------------------------------------------------
-            // FORWARD THRUST
-            // --------------------------------------------------
-
             if (probes != null)
             {
                 if (throttle > 0f && probes.BowBlocked)
@@ -649,10 +636,6 @@ namespace DV_Boats
                 transform.forward * (thrustForce * throttle),
                 ForceMode.Force
             );
-
-            // --------------------------------------------------
-            // STEERING INPUT 
-            // --------------------------------------------------
            
             float steer = 0f;
 
@@ -686,7 +669,6 @@ namespace DV_Boats
             if (right)
                 steer = 0.4f;
 
-            // Update UI key-held visuals (keyboard only)
             BoatUIController.SetMoveLeftFromKey(
                 IsKeyWithModifiersPressed(
                     s.leftKey,
@@ -707,10 +689,6 @@ namespace DV_Boats
                 )
             );
 
-
-            // --------------------------------------------------
-            // APPLY RUDDER (scaled by speed)
-            // --------------------------------------------------
             if (steer != 0f && speedFactor > 0.01f)
             {
                 rb.AddRelativeTorque(                 
@@ -718,10 +696,7 @@ namespace DV_Boats
                     ForceMode.Acceleration
                 );
             }
-
-            // --------------------------------------------------
-            // AUDIO
-            // --------------------------------------------------       
+   
             if (engineSource == null || engineSource.clip == null || rb == null)
                 return;
 
@@ -749,6 +724,13 @@ namespace DV_Boats
 
         void OnCollisionEnter(Collision collision)
         {
+            if (collision.collider != null &&
+                collision.collider.gameObject != null &&
+                collision.collider.gameObject.name.StartsWith("DV_BEACHBALL_"))
+            {
+                return;
+            }
+
             if (collision.collider.GetComponent<ItemBuoyancyEnabler>() == null)
             {
                 throttle = 0f;
@@ -756,7 +738,7 @@ namespace DV_Boats
                 rb.angularVelocity = Vector3.zero;
 
                 blockedByCollision = true;
-                collisionBlockTimer = 0.5f; // seconds
+                collisionBlockTimer = 0.5f; 
 
                 Main.Log("[BoatController] 💥 Collision → blocking movement");
             }
@@ -956,8 +938,6 @@ namespace DV_Boats
             if (spotLightRoot == null)
                 return;
 
-            
-            // Read UI / key state
             bool left = BoatUIController.SpotLightSwivelLeftHeld;
             bool right = BoatUIController.SpotLightSwivelRightHeld;
 
@@ -998,8 +978,8 @@ namespace DV_Boats
                 Input.GetKey(Main.Settings.SpotLightSwivelRightKey) ||
                 BoatUIController.SpotLightSwivelRightHeld;
 
-            const float SpotLightSwivelSpeed = 90f; // deg/sec
-            const float SpotLightMaxYaw = 45f;      // deg
+            const float SpotLightSwivelSpeed = 90f; 
+            const float SpotLightMaxYaw = 45f;      
 
             if (left)
                 spotLightYaw -= SpotLightSwivelSpeed * Time.deltaTime;
@@ -1047,12 +1027,10 @@ namespace DV_Boats
             if (!keyDown)
                 return false;
 
-            // Current modifier state
             bool ctrl = Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl);
             bool alt = Input.GetKey(KeyCode.LeftAlt) || Input.GetKey(KeyCode.RightAlt);
             bool shift = Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift);
 
-            // Exact match required
             if (requireCtrl != ctrl) return false;
             if (requireAlt != alt) return false;
             if (requireShift != shift) return false;
@@ -1164,7 +1142,6 @@ namespace DV_Boats
             if (ActiveBoat == null)
                 return;
 
-            // Force ghost off first
             if (BoatUIController.GhostBoatOn)
                 BoatUIController.Instance?.TriggerGhostBoatFromInput();
 

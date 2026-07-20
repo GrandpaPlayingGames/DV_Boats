@@ -92,7 +92,6 @@ namespace DV_Boats
         public sealed class ProbeMarker : MonoBehaviour
         {
             public Vector3 CanonicalPos;
-            //private const float RAY_LENGTH = 100f;
  
             private void Start()
             {

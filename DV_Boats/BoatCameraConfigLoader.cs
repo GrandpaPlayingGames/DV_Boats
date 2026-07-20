@@ -164,9 +164,6 @@ namespace DV_Boats
             EnsureLoaded();
         }
 
-        // -------------------------------------------------------------------
-        // DEFAULT FILE
-        // -------------------------------------------------------------------
         private static void CreateDefaultFile(string path)
         {
             const string defaultJson =
@@ -299,9 +296,6 @@ namespace DV_Boats
             }
         }
 
-        // -------------------------------------------------------------------
-        // HELPERS
-        // -------------------------------------------------------------------
         private static int FindMatchingBracket(string text, int startIndex, char open, char close)
         {
             int depth = 0;
